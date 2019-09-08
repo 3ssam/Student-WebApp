@@ -1,25 +1,22 @@
-<%@page import="mo.essam.models.Student"%>
-<%@page import="java.util.List"%>
-<%@page import="mo.essam.*"%>
+<%@ page import="mo.essam.models.Student"%>
+<%@ page import="java.util.List"%>
+<%@ page import="mo.essam.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
 <head>
 <link type="text/css" rel="stylesheet" href="CSS/style.css">
 
-<title>Student Tracker App</title>
+<title>Student Web App</title>
 </head>
 
-<%
-	// get the students from the request object (sent by servlet)
-	List<Student> theStudents = (List<Student>) request.getAttribute("Students");
-%>
 
 <body>
 
 	<div id="wrapper">
 		<div id="header">
-			<h2>FooBar University</h2>
+			<h2>Ain Shams University</h2>
 		</div>
 	</div>
 
@@ -35,19 +32,16 @@
 					<th>Email</th>
 				</tr>
 
-				<%
-					for (Student tempStudent : theStudents) {
-				%>
 
-				<tr>
-					<td><%=tempStudent.getFirstName()%></td>
-					<td><%=tempStudent.getLastName()%></td>
-					<td><%=tempStudent.getEmail()%></td>
-				</tr>
+				<c:forEach var="item" items="${Students}">
 
-				<%
-					}
-				%>
+					<tr>
+						<td>${item.firstName }</td>
+						<td>${item.lastName }</td>
+						<td>${item.email }</td>
+					</tr>
+
+				</c:forEach>
 
 			</table>
 
