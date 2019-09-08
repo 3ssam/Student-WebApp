@@ -5,7 +5,9 @@
 <html>
 
 <head>
-	<title>Student Tracker App</title>	
+<link type="text/css" rel="stylesheet" href="CSS/style.css">
+
+<title>Student Tracker App</title>
 </head>
 
 <%
@@ -22,31 +24,35 @@
 	</div>
 
 	<div id="container">
-	
+
 		<div id="content">
-		
+
 			<table>
-			
+
 				<tr>
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Email</th>
 				</tr>
-				
-				<% for (Student tempStudent : theStudents) { %>
-				
-					<tr>
-						<td> <%= tempStudent.getFirstName() %> </td>
-						<td> <%= tempStudent.getLastName() %> </td>
-						<td> <%= tempStudent.getEmail() %> </td>
-					</tr>
-				
-				<% } %>
-				
+
+				<%
+					for (Student tempStudent : theStudents) {
+				%>
+
+				<tr>
+					<td><%=tempStudent.getFirstName()%></td>
+					<td><%=tempStudent.getLastName()%></td>
+					<td><%=tempStudent.getEmail()%></td>
+				</tr>
+
+				<%
+					}
+				%>
+
 			</table>
-		
+
 		</div>
-	
+
 	</div>
 </body>
 
