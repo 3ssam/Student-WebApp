@@ -24,6 +24,11 @@
 
 		<div id="content">
 
+
+			<input type="button" value="Add Student"
+				onclick="window.location.href='Add-Student-Form.jsp'; return false;"
+				class="add-student-button" />
+
 			<table>
 
 				<tr>

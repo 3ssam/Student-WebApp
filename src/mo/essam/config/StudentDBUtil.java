@@ -1,6 +1,7 @@
 package mo.essam.config;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -78,5 +79,37 @@ public class StudentDBUtil {
 		return resultSet;
 
 	}
+
+	public void AddStudent(Student student) {
+		
+		Connection connection = null;
+		PreparedStatement statement = null;
+
+		try {
+
+			connection = dataSource.getConnection();
+
+			String Query = "insert into student (first_name,last_name,email) values (?,?,?)";
+
+			statement = connection.prepareStatement(Query);
+			
+			statement.setString(1, student.getFirstName());
+			statement.setString(2, student.getLastName());
+			statement.setString(3, student.getEmail());
+			
+			statement.execute();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
 
 }
