@@ -62,6 +62,9 @@ public class StudentControllerServlet extends HttpServlet {
 			case "LIST":
 				DispalyStudents(request, response);
 				break;
+			case "LOAD":
+				ShowDetialsOfStudent(request, response);
+				break;
 			default:
 				DispalyStudents(request, response);
 				break;
@@ -74,13 +77,34 @@ public class StudentControllerServlet extends HttpServlet {
 		
 	}
 
+	private void ShowDetialsOfStudent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String id = request.getParameter("StudentID");
+		
+		Student student = DBObject.getStudent(id);
+		
+		request.setAttribute("Student", student);
+		
+		Displaynow(request, response, "/Update-Student-Form.jsp");
+	}
+
 	private void DeleteStudent(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void UpdateStudent(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+	private void UpdateStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
+		String email = request.getParameter("email");
+		int id = Integer.parseInt(request.getParameter("studentId"));
+		
+		Student s = new Student(id,firstName,lastName,email);
+		
+		boolean check = DBObject.UpdateStudent(s);
+		
+		DispalyStudents(request, response);
 		
 	}
 
@@ -104,13 +128,13 @@ public class StudentControllerServlet extends HttpServlet {
 		
 		request.setAttribute("Students", DBObject.getStudents());
 		
-		Displaynow(request,response);
+		Displaynow(request,response,"/list-students.jsp");
 		
 	}
 
-	private void Displaynow(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void Displaynow(HttpServletRequest request, HttpServletResponse response,String nextPage) throws ServletException, IOException {
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/list-students.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher(nextPage);
 		
 		dispatcher.forward(request, response);
 	}

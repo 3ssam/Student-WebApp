@@ -35,15 +35,22 @@
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Email</th>
+					<th>Action</th>
 				</tr>
 
 
 				<c:forEach var="item" items="${Students}">
 
+					<c:url var="tempLink" value="StudentControllerServlet">
+						<c:param name="command" value="LOAD" />
+						<c:param name="StudentID" value="${item.id }" />
+					</c:url>
+					
 					<tr>
 						<td>${item.firstName }</td>
 						<td>${item.lastName }</td>
 						<td>${item.email }</td>
+						<td><a href="${tempLink}">UPDATE</a></td>
 					</tr>
 
 				</c:forEach>
