@@ -186,4 +186,34 @@ public class StudentDBUtil {
 		return false;
 	}
 
+	public boolean DeleteStudent(int id) {
+		Connection connection = null;
+		PreparedStatement statement = null;
+
+		try {
+
+			connection = dataSource.getConnection();
+
+			String Query = "delete from student where id = ?";
+
+			statement = connection.prepareStatement(Query);
+			
+			statement.setInt(1, id);
+
+			statement.execute();
+			
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+
 }

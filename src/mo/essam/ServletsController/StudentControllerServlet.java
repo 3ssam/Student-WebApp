@@ -88,9 +88,13 @@ public class StudentControllerServlet extends HttpServlet {
 		Displaynow(request, response, "/Update-Student-Form.jsp");
 	}
 
-	private void DeleteStudent(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+	private void DeleteStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		int id = Integer.parseInt(request.getParameter("StudentID"));
+		
+		boolean check = DBObject.DeleteStudent(id);
+		
+		DispalyStudents(request, response);	
 	}
 
 	private void UpdateStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
